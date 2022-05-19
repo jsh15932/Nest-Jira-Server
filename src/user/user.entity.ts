@@ -16,12 +16,6 @@ export class User {
     @Exclude()
     password: string;
 
-    @Column({
-        type: 'text',
-        default: 'en-US'
-    })
-    language: string;
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
