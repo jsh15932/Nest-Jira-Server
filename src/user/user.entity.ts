@@ -1,10 +1,11 @@
 import { Exclude } from "class-transformer";
-import { BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import * as bcrypt from "bcrypt";
 
 @Entity('user')
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    id: string;
 
     @Column()
     username: string;
@@ -13,17 +14,16 @@ export class User {
     email: string;
 
     @Column()
-    @Exclude()
     password: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @CreateDateColumn()
     createdAt: Date;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @BeforeUpdate()
-    updateTimestamp() {
-        this.updatedAt = new Date();
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 10);
     }
 }
