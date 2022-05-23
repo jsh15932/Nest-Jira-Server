@@ -17,9 +17,9 @@ export class UserService {
 
     async create(registerUserDto: RegisterUserDto): Promise<UserDto> {
         const {
-            username,
             email,
-            password
+            password,
+            username
         } = registerUserDto;
         const isUserExisted = await this.userRepository.findOne({
             where: {
@@ -30,9 +30,9 @@ export class UserService {
             throw new HttpException('이미 존재하는 유저', HttpStatus.BAD_REQUEST);
         }
         const user: User = await this.userRepository.create({
-            username,
+            email,
             password,
-            email
+            username
         });
         await this.userRepository.save(user);
         return userResDto(user);
@@ -63,7 +63,7 @@ export class UserService {
         if(!compare) {
             throw new HttpException('잘못된 인증', HttpStatus.UNAUTHORIZED);
         }
-        return 
+        return userResDto(user);
     }
 
     async findOne(options?: object): Promise<UserDto> {
