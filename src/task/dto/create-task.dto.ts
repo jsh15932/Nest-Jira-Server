@@ -7,13 +7,13 @@ export class CreateTaskDto {
     readonly description: string;
 
     @IsNotEmpty()
-    readonly projectId: number;
+    readonly projectId: string;
 
     @IsNotEmpty()
-    readonly priorityId: number;
+    readonly priorityId: string;
 
     @IsNotEmpty()
-    readonly typeId: number;
+    readonly typeId: string;
 
-    readonly assigneeId: number;
+    readonly assigneeId: string;
 }

@@ -12,7 +12,11 @@ export class TaskService {
     ) {}
 
     async create(createTaskDto: CreateTaskDto): Promise<Task> {
-        const res = Object.assign(new Task(), createTaskDto);
-        return this.taskRepository.save(res);
+        const newTask = Object.assign(new Task(), createTaskDto);
+        return this.taskRepository.save(newTask);
+    }
+
+    async save(task: Partial<Task>): Promise<Task> {
+        return this.taskRepository.save(task);
     }
 }

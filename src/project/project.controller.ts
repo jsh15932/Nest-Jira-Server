@@ -16,10 +16,7 @@ export class ProjectController {
     @Post('create')
     @UseGuards(AuthGuard('jwt'))
     async create(
-        @Req() req,
-        @Res() res: Response,
-        @Body() createProjectDto: CreateProjectDto
-    ) {
+        @Req() req, @Res() res: Response, @Body() createProjectDto: CreateProjectDto) {
         const user = req.user as User;
         const code = createProjectDto.code.toLocaleUpperCase();
         const isExisted = await this.projectService.findByCode(code);
@@ -41,10 +38,7 @@ export class ProjectController {
 
     @Put('update')
     @UseGuards(AuthGuard('jwt'), ProjectGuard)
-    async update(
-        @Res() res: Response,
-        @Body() updateProjectDto: updateProjectDto
-    ) {
+    async update(@Res() res: Response, @Body() updateProjectDto: updateProjectDto) {
         const updated = await this.projectService.update(updateProjectDto);
         if(updated) {
             res.status(HttpStatus.OK).send();
@@ -55,10 +49,7 @@ export class ProjectController {
 
     @Post('complete/:id')
     @UseGuards(AuthGuard('jwt'), ProjectGuard)
-    async completeProject(
-        @Res() res: Response,
-        @Param() params
-    ) {
+    async completeProject(@Res() res: Response, @Param() params) {
         const id = params.id;
         const completed = await this.projectService.complete(id);
         if(completed) {
@@ -71,10 +62,7 @@ export class ProjectController {
 
     @Delete(':id')
     @UseGuards(AuthGuard('jwt'), ProjectGuard)
-    async delete(
-        @Res() res: Response,
-        @Param() params
-    ) {
+    async delete(@Res() res: Response, @Param() params) {
         const deleted = await this.projectService.delete(params.id);
         if(deleted) {
             res.status(HttpStatus.OK).send(deleted);

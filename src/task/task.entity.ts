@@ -1,3 +1,4 @@
+import { Type } from "src/type/type.entity";
 import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('task')
@@ -15,25 +16,25 @@ export class Task {
     description: string;
 
     @Column()
-    reporterId: number;
+    reporterId: string;
 
     @Column()
-    assigneeId: number;
+    assigneeId: string;
 
-    // @ManyToOne(
-    //     type => loadavg,
-    //     lov => lov.id
-    // )
-    // JoinTable()
-    // type: Lov;
+    @ManyToOne(
+        types => Type,
+        type => type.id
+    )
+    @JoinTable()
+    types: Type;
 
     @Column()
-    projectId: number;
+    projectId: string;
 
-    // @ManyToOne(
-    //     type => Lov,
-    //     lov => lov.id
-    // )
-    // @JoinTable()
-    // priority: Lov;
+    @ManyToOne(
+        types => Type,
+        type => type.id
+    )
+    @JoinTable()
+    priority: Type;
 }
