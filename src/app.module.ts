@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ProjectModule } from './project/project.module';
+import { TaskModule } from './task/task.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -36,6 +37,7 @@ import * as Joi from 'joi';
     UserModule,
     AuthModule,
     ProjectModule,
+    TaskModule,
   ],
   controllers: [AppController],
   providers: [],

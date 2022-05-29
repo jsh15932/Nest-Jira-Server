@@ -6,9 +6,7 @@ import { ProjectService } from './project.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      Project
-    ])
+    TypeOrmModule.forFeature([Project])
   ],
   controllers: [ProjectController],
   providers: [ProjectService]
